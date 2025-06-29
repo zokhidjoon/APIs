@@ -11,7 +11,7 @@ class TextInput(BaseModel):
 
 @app.post("/summarize")
 def summarize_text(input: TextInput):
-    headers = {"Authorization": f"Bearer YOUR_HUGGINGFACE_API_KEY"}
+    headers = {"Authorization": f"Bearer {os.getenv('HF_API_KEY')}"}
     payload = {"inputs": input.text}
     response = requests.post("https://api-inference.huggingface.co/models/facebook/bart-large-cnn", headers=headers, json=payload)
     result = response.json()
