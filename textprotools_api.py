@@ -1,4 +1,3 @@
-# textprotools_api.py
 from fastapi import FastAPI
 from pydantic import BaseModel
 from transformers import pipeline
@@ -7,7 +6,8 @@ from textblob import TextBlob
 
 app = FastAPI(title="TextProTools API")
 
-summarizer = pipeline("summarization")
+# Use a smaller summarization model to fit within memory limits
+summarizer = pipeline("summarization", model="t5-small", tokenizer="t5-small")
 
 class TextInput(BaseModel):
     text: str
@@ -34,3 +34,4 @@ def word_count(input: TextInput):
     word_count = len(input.text.split())
     char_count = len(input.text)
     return {"word_count": word_count, "char_count": char_count}
+
