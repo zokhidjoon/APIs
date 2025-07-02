@@ -51,3 +51,7 @@ def word_count(input: TextInput):
     char_count = len(input.text)
     return {"word_count": word_count, "char_count": char_count}
 
+# ✅ Health check endpoint for RapidAPI
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
